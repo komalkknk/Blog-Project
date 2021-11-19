@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+ <html lang="en" dir="ltr">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <meta charset="utf-8">
+            <title></title>
+    </head>
+    <body>
+    {% if sent %}
+        <h1>Email Successfully Sent!!!</h1><hr>
+        <h2>{{post.title}} Post Shared By Email</h2>
+    {% else %}
+        <div class="container" style="box-shadow:5px 10px 18px #888888;height:550px;width:500px;margin-top:50px;margin:0 0 0 400px;">
+            <H1 style="color:#3A8ED8;" align="center">Share "{{post.title}}" Post By Email</h1><hr>
+            <form style="text-align:center;" method="POST">
+                {{form.as_p}}
+                {% csrf_token %}
+                <input type="submit" class="btn btn-primary btn-lg" value="Send">
+            </form>
+        </div>
+    {% endif %}
+    </body>
+</html>
+
+
+
+

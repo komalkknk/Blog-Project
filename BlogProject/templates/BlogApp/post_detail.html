@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+ <html lang="en" dir="ltr">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <meta charset="utf-8">
+            <title></title>
+    </head>
+    <body>
+
+        <div class="container" style="border-style:outset;width:50;padding:50px;margin:0 0  0 90px;box-shadow: 5px 10px 8px #888888">
+        <H1 style="color:#DC143C;" align="center">{{post.title}}</H1><hr style="height:2px;background-color:#02075d;">
+        <h4 style="font-size:20px;"><b><i>Published on {{post.publish}} by {{post.author|title}}</i></b></h4>
+        <p>{{post.body|linebreaks}}</p><br>
+        <a href="/sendmailview/{{post.id}}" class="btn btn-lg btn-success">Share Post By Email</a><br><br><hr>
+
+        {% with comments.count as comments_count %}
+        <h2>{{comments_count}} Comment{{comments_count|pluralize}}</h2>
+        {% endwith%}<hr>
+        {%if comments %}
+                {%for comment in comments %}
+                <p style="color:blue;">comment {{forloop.counter}} by {{comment.name}} on {{comment.created}}</p>
+                {{comment.body|linebreaks}}
+                <hr>
+                {%endfor%}
+                {%else%}
+                <h4>There are NO Comments Yet !!!</h4><hr>
+                {%endif%}
+                {%if csubmit %}
+                <h4>Your Comment Added Succefully</h4>
+                {%else%}
+                <h3 style="color:#DC143C;">Write a comment...</h3><hr>
+                <form method="post">
+                        {{form.as_p}}
+                        {%csrf_token%}
+                        <br><input type="submit" name="" value="Submit Comment" class="btn btn-success btn-lg">
+                </form>
+                {%endif%}
+                </div>
+    </body>
+</html>
